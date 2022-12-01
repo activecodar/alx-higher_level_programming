@@ -1,14 +1,14 @@
 #!/usr/bin/python3
-import argparse
+import marshal, dis, sys
 
-
-def output(args):
-    sum_total = sum([int(i) for i in args])
-    print("{:d}".format(sum_total))
-
-
-if __name__ == "__main__":
-    parser = argparse.ArgumentParser()
-    parser.add_argument('_args', nargs='*')
-    args = parser.parse_args()._args
-    output(args)
+header_sizes = [
+    (8,  (0, 9, 2)),
+    (12, (3, 6)),
+    (16, (3, 7)),
+]
+header_size = next(s for s, v in reversed(header_sizes) if sys.version_info >= v)
+f = open("hidden_4.pyc", "rb")
+meta = f.read(header_size)
+code = marshal.load(f)
+dis.dis(code)
+print(code.co_varnames)
