@@ -1,14 +1,7 @@
 #!/usr/bin/python3
-import marshal, dis, sys
+import hidden_4
 
-header_sizes = [
-    (8,  (0, 9, 2)),
-    (12, (3, 6)),
-    (16, (3, 7)),
-]
-header_size = next(s for s, v in reversed(header_sizes) if sys.version_info >= v)
-f = open("hidden_4.pyc", "rb")
-meta = f.read(header_size)
-code = marshal.load(f)
-dis.dis(code)
-print(code.co_varnames)
+if __name__ == "__main__":
+    names = dir(hidden_4)
+    for name in [i for i in names if i[:2] != "__"]:
+        print(name)
