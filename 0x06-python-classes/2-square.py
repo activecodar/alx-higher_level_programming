@@ -15,7 +15,8 @@ class Square:
         side_length (float): The length of a side of the square.
     """
     def __init__(self, size: int = 0) -> None:
-        """Initialize a Square object.
+        """
+        Initialize a Square object.
 
         Args:
             size (int, optional): The length of a side of the square.
