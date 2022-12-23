@@ -1,0 +1,29 @@
+"""
+Tests for the add_integer function.
+>>> add_integer = __import__('0-add_integer').add_integer
+>>> add_integer(1, 2)
+3
+>>> add_integer('1', 2)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "<stdin>", line 3, in add_integer
+TypeError: a must be an integer or float
+>>> add_integer(1, '2')
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "<stdin>", line 5, in add_integer
+TypeError: b must be an integer or float
+>>> add_integer(1, 0)
+1
+>>> add_integer(1, -1)
+0
+>>> add_integer(0, 0)
+0
+>>> add_integer(-1, -1)
+-2
+>>> add_integer(98, 98)
+196
+>>> add_integer(0.1, 0.1)
+0
+>>> add_integer(1, b=2)
+3
