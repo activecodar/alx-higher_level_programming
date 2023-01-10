@@ -1,0 +1,16 @@
+The ``7-base_geometry`` module
+======================
+
+Using ``BaseGeometry``
+-------------------
+>>> BaseGeometry = __import__('7-base_geometry').BaseGeometry
+>>> base_geometry = BaseGeometry()
+>>> base_geometry.integer_validator("side", 3)
+>>> base_geometry.integer_validator("side", "3")
+Traceback (most recent call last):
+...
+TypeError: side must be an integer
+>>> base_geometry.integer_validator("side", 0)
+Traceback (most recent call last):
+...
+ValueError: side must be greater than 0
