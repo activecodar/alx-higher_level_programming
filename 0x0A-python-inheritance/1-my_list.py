@@ -21,6 +21,4 @@ class MyList(list):
         Prints a sorted version of the list.
         The list is sorted in ascending order.
         """
-        sorted_list = self.copy()
-        sorted_list.sort()
-        print(sorted_list)
+        print(sorted(self))
