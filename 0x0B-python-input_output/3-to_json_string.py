@@ -10,7 +10,7 @@ def to_json_string(my_obj):
     Convert an object to json representation.
 
     Args:
-        my_obj : The object that needs to be converted to json
+        my_obj: The object that needs to be converted to json
 
     Returns:
         str: json representation of the object
