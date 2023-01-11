@@ -18,7 +18,7 @@ class BaseGeometry:
             NotImplementedError: If the area is not
             implemented for the specific geometry object.
         """
-        raise Exception("area() is not implemented")
+        raise NotImplementedError("area() is not implemented")
 
     def integer_validator(self, name, value):
         """
@@ -32,7 +32,7 @@ class BaseGeometry:
             TypeError: If the value is not an integer.
             ValueError: If the value is less than or equal to 0.
         """
-        if not isinstance(value, int):
+        if type(value) is not int:
             raise TypeError(f"{name} must be an integer")
-        if int(value) <= 0:
+        if value <= 0:
             raise ValueError(f"{name} must be greater than 0")
