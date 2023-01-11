@@ -18,4 +18,4 @@ class BaseGeometry:
             NotImplementedError: If the area is
             not implemented for the specific geometry object.
         """
-        raise NotImplementedError("area() is not implemented")
+        raise Exception("area() is not implemented")
