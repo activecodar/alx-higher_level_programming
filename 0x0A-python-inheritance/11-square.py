@@ -8,6 +8,10 @@ Rectangle = __import__('9-rectangle').Rectangle
 
 
 class Square(Rectangle):
+    """
+    Square defining class
+    """
+
     def __init__(self, size):
         """
         Initialize a square object.
@@ -19,12 +23,12 @@ class Square(Rectangle):
             TypeError: If size is not an integer.
             ValueError: If size is less than or equal to 0.
         """
+        self.integer_validator("size", size)
         super().__init__(size, size)
         self.__size = size
-        super().integer_validator("size", self.__size)
 
-    def area(self):
+    def __str__(self):
         """
-        Calculate the area of the square.
+        Return the string representation of the square.
         """
-        return self.__size ** 2
+        return "[Square] {}/{}".format(self.__size, self.__size)
