@@ -4,35 +4,27 @@ This module contains a base class for
 geometry objects.
 """
 
+BaseGeometry = __import__('7-base_geometry').BaseGeometry
 
-class BaseGeometry:
+
+class Rectangle(BaseGeometry):
     """
-    A base class for geometry objects.
+    A base class for Rectangle
     """
 
-    def area(self):
+    def __init__(self, width, height):
         """
-        Calculate the area of the geometry object.
-
-        Raises:
-            NotImplementedError: If the area is not
-            implemented for the specific geometry object.
-        """
-        raise NotImplementedError("area() is not implemented")
-
-    def integer_validator(self, name, value):
-        """
-        Validate a given value.
+        Initialize a rectangle object.
 
         Args:
-            name (str): The name of the value to validate.
-            value: The value to validate.
+            width (int): The width of the rectangle.
+            height (int): The height of the rectangle.
 
         Raises:
-            TypeError: If the value is not an integer.
-            ValueError: If the value is less than or equal to 0.
+            TypeError: If width or height is not an integer.
+            ValueError: If width or height is less than or equal to 0.
         """
-        if type(value) is not int:
-            raise TypeError(f"{name} must be an integer")
-        if value <= 0:
-            raise ValueError(f"{name} must be greater than 0")
+        self.__width = width
+        self.__height = height
+        super().integer_validator("width", self.__width)
+        super().integer_validator("height", self.__height)
