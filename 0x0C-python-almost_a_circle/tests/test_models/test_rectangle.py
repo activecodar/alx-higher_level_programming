@@ -32,6 +32,35 @@ class TestRectangle(unittest.TestCase):
     def test_y_setter(self):
         self.r.y = 20
         self.assertEqual(self.r.y, 20)
+    
+    def test_width_validation(self):
+        with self.assertRaisesRegex(TypeError, 'height must be an integer'):
+            r = Rectangle(12, "20")
+            r.height
+        with self.assertRaisesRegex(ValueError, 'width must be > 0'):
+            r = Rectangle(0, 20)
+        with self.assertRaisesRegex(ValueError, 'width must be > 0'):
+            r = Rectangle(-10, 20)
+    
+    def test_height_validation(self):
+        with self.assertRaisesRegex(TypeError, 'height must be an integer'):
+            r = Rectangle(10, "20")
+        with self.assertRaisesRegex(ValueError, 'height must be > 0'):
+            r = Rectangle(10, 0)
+        with self.assertRaisesRegex(ValueError, 'height must be > 0'):
+            r = Rectangle(10, -20)
+
+    def test_x_validation(self):
+        with self.assertRaisesRegex(TypeError, 'x must be an integer'):
+            r = Rectangle(10, 20, x="0")
+        with self.assertRaisesRegex(ValueError, 'x must be >= 0'):
+            r = Rectangle(10, 20, x=-1)
+
+    def test_y_validation(self):
+        with self.assertRaisesRegex(TypeError, 'y must be an integer'):
+            r = Rectangle(10, 20, y="0")
+        with self.assertRaisesRegex(ValueError, 'y must be >= 0'):
+            r = Rectangle(10, 20, y=-1)
 
 if __name__ == '__main__':
     unittest.main()
