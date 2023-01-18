@@ -145,8 +145,11 @@ class Rectangle(Base):
         Print the Rectangle to the console.
         The Rectangle is printed using the character "#".
         """
-        for _ in range(self.__height):
-            print("#" * self.__width)
+        [print("") for _ in range(0, self.__y)]
+        for _ in range(0, self.__height):
+            [print(" ", end="") for _ in range(0, self.__x)]
+            [print("#", end="") for _ in range(0, self.__width)]
+            print("")
 
     def __str__(self):
         """
