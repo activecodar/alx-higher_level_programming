@@ -66,8 +66,8 @@ class TestRectangle(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'y must be >= 0'):
             r = Rectangle(10, 20, y=-1)
     
-    def test_update(self):
-        self.rect_update.update(10, 11, 12, 13, 14)
+    def test_update_with_kwargs(self):
+        self.rect_update.update(id=10, width=11, height=12, x=13, y=14)
         self.assertEqual(self.rect_update.id, 10)
         self.assertEqual(self.rect_update.width, 11)
         self.assertEqual(self.rect_update.height, 12)
@@ -75,12 +75,13 @@ class TestRectangle(unittest.TestCase):
         self.assertEqual(self.rect_update.y, 14)
         
     def test_update_only_id(self):
-        self.rect_update.update(20)
+        self.rect_update.update(id=20)
         self.assertEqual(self.rect_update.id, 20)
         self.assertEqual(self.rect_update.width, 4)
         self.assertEqual(self.rect_update.height, 5)
         self.assertEqual(self.rect_update.x, 6)
         self.assertEqual(self.rect_update.y, 7)
+
 
 if __name__ == '__main__':
     unittest.main()
