@@ -159,3 +159,23 @@ class Rectangle(Base):
         str_repr += f"({self.id}) {self.__x}/{self.__y}"
         str_repr += f" - {self.__width}/{self.__height}"
         return str_repr
+
+    def update(self, *args):
+        """
+        Assigns an argument to each attribute in the following order:
+        1st argument: id attribute
+        2nd argument: width attribute
+        3rd argument: height attribute
+        4th argument: x attribute
+        5th argument: y attribute
+        """
+        if len(args) > 0:
+            self.id = args[0]
+        if len(args) > 1:
+            self.width = args[1]
+        if len(args) > 2:
+            self.height = args[2]
+        if len(args) > 3:
+            self.x = args[3]
+        if len(args) > 4:
+            self.y = args[4]

@@ -4,6 +4,7 @@ from models.rectangle import Rectangle
 class TestRectangle(unittest.TestCase):
     def setUp(self):
         self.r = Rectangle(10, 20)
+        self.rect_update = Rectangle(4, 5, 6, 7, 8)
 
     def test_width_getter(self):
         self.assertEqual(self.r.width, 10)
@@ -64,6 +65,22 @@ class TestRectangle(unittest.TestCase):
             r = Rectangle(10, 20, y="0")
         with self.assertRaisesRegex(ValueError, 'y must be >= 0'):
             r = Rectangle(10, 20, y=-1)
+    
+    def test_update(self):
+        self.rect_update.update(10, 11, 12, 13, 14)
+        self.assertEqual(self.rect_update.id, 10)
+        self.assertEqual(self.rect_update.width, 11)
+        self.assertEqual(self.rect_update.height, 12)
+        self.assertEqual(self.rect_update.x, 13)
+        self.assertEqual(self.rect_update.y, 14)
+        
+    def test_update_only_id(self):
+        self.rect_update.update(20)
+        self.assertEqual(self.rect_update.id, 20)
+        self.assertEqual(self.rect_update.width, 4)
+        self.assertEqual(self.rect_update.height, 5)
+        self.assertEqual(self.rect_update.x, 6)
+        self.assertEqual(self.rect_update.y, 7)
 
 if __name__ == '__main__':
     unittest.main()
