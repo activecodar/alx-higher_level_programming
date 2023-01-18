@@ -33,6 +33,9 @@ class TestRectangle(unittest.TestCase):
         self.r.y = 20
         self.assertEqual(self.r.y, 20)
     
+    def test_area(self):
+        self.assertEqual(self.r.area(), 200)
+    
     def test_width_validation(self):
         with self.assertRaisesRegex(TypeError, 'height must be an integer'):
             r = Rectangle(12, "20")
