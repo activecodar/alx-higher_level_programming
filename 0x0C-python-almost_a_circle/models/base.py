@@ -4,6 +4,7 @@
 The `models` package contains the base class for other
 classes to inherit from.
 """
+import json
 
 
 class Base:
@@ -29,3 +30,16 @@ class Base:
         else:
             Base.__nb_objects += 1
             self.id = Base.__nb_objects
+
+    def to_json_string(list_dictionaries):
+        """
+        Converts a lit of dictionaries to a json object
+        Args:
+            list_dictionaries: List of dictionaries
+        Returns:
+            json: Json representation of list_dictionaries.
+        """
+        if list_dictionaries is None or len(list_dictionaries) == 0:
+            return "[]"
+        else:
+            return json.dumps(list_dictionaries)
