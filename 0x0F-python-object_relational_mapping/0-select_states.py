@@ -1,7 +1,8 @@
 #!/usr/bin/python3
 """
 This script sets up a MySQL database connection using the provided
-credentials and tests the connection by executing a query on the 'states' table.
+credentials and tests the connection by executing
+a query on the 'states' table.
 
 Usage:
     ./script.py <mysql username> <mysql password> <mysql database>
@@ -17,7 +18,8 @@ import MySQLdb
 
 def setup_db(user, password, database, host='localhost'):
     """
-        Sets up a MySQL database connection and tests the connection by executing a query
+        Sets up a MySQL database connection and tests the
+        connection by executing a query
         on the 'states' table.
 
         Args:
@@ -26,7 +28,8 @@ def setup_db(user, password, database, host='localhost'):
             database: MySQL database name
             host: MySQL host name (default 'localhost')
         """
-    db = MySQLdb.connect(host=host, user=user, password=password, database=database)
+    db = MySQLdb.connect(host=host, user=user, password=password,
+                         database=database)
     cursor = db.cursor()
     cursor.execute('SELECT * FROM states ORDER BY id ASC;')
     results = cursor.fetchall()
