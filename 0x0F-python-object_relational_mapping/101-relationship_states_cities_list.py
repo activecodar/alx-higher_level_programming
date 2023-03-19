@@ -14,10 +14,10 @@ Where:
 """
 
 import sys
-
+import warnings
 from relationship_city import City
 from relationship_state import Base, State
-from sqlalchemy import create_engine
+from sqlalchemy import create_engine, exc
 from sqlalchemy.orm import sessionmaker
 import urllib.parse
 
@@ -36,6 +36,8 @@ def main(user, password, database, host='localhost'):
     Returns:
         None.
     """
+    # Ignore SQLAlchemy warnings
+    warnings.filterwarnings("ignore", category=exc.SAWarning)
     engine = create_engine(f'mysql+mysqldb://{user}:'
                            f'{urllib.parse.quote_plus(password)}'
                            f'@{host}/{database}')
@@ -43,16 +45,19 @@ def main(user, password, database, host='localhost'):
     Session = sessionmaker(bind=engine)
     Session.configure(bind=engine)
     session = Session()
-    results = session.query(State).order_by(State.id).all()
-    for result in results:
-        print(f"{result.id}: {result.name}")
-        for city in get_cities(session, result.id):
+    results = session.query(State, City).order_by(State.id, City.id).all()
+    states = list(set([res[0] for res in results]))
+    states.sort(key=lambda x: x.id)
+    for state in states:
+        print(f"{state.id}: {state.name}")
+        for city in sorted(state.cities, key=lambda x: x.id):
             print(f"\t{city.id}: {city.name}")
 
 
-def get_cities(session, state_id):
-    return session.query(City).filter_by(state_id=state_id
-                                         ).order_by(City.id).all()
+def get_cities(cities, state_id):
+    cities_list = [city for city in cities if city.state_id == state_id]
+    cities_list.sort(key=lambda x: x.id)
+    return cities_list
 
 
 if __name__ == '__main__':
