@@ -6,7 +6,8 @@ Base and links to the MySQL table states.
 
 
 from sqlalchemy import Column, Integer, String, ForeignKey
-from model_state import Base
+
+from relationship_state import Base
 
 
 class City(Base):
