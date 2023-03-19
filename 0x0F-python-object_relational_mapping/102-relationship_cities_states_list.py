@@ -1,8 +1,7 @@
 #!/usr/bin/python3
 """
-This module contains a script that lists
-all State objects, and corresponding City objects,
-contained in the database hbtn_0e_101_usa
+This module contains a script
+that lists all City objects from the database hbtn_0e_101_usa
 
 Example usage:
     $ python script.py <mysql username> <mysql password> <mysql database>
@@ -24,8 +23,7 @@ import urllib.parse
 
 def main(user, password, database, host='localhost'):
     """
-    Lists all State objects, and corresponding City objects,
-    contained in the database hbtn_0e_101_usa
+    Lists all City objects from the database hbtn_0e_101_usa
 
     Args:
         user: username to connect to the database.
@@ -45,13 +43,9 @@ def main(user, password, database, host='localhost'):
     Session = sessionmaker(bind=engine)
     Session.configure(bind=engine)
     session = Session()
-    results = session.query(State, City).order_by(State.id, City.id).all()
-    states = list(set([res[0] for res in results]))
-    states.sort(key=lambda x: x.id)
-    for state in states:
-        print(f"{state.id}: {state.name}")
-        for city in sorted(state.cities, key=lambda x: x.id):
-            print(f"\t{city.id}: {city.name}")
+    cities = session.query(City).order_by(City.id).all()
+    for city in cities:
+        print(f"{city.id}: {city.name} -> {city.state.name}")
 
 
 if __name__ == '__main__':
