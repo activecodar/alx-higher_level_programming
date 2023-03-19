@@ -1,8 +1,8 @@
 #!/usr/bin/python3
 """
-This module contains a script that creates the
-State “California” with the City “San Francisco”
-from the database hbtn_0e_100_usa:
+This module contains a script that lists
+all State objects, and corresponding City objects,
+contained in the database hbtn_0e_101_usa
 
 Example usage:
     $ python script.py <mysql username> <mysql password> <mysql database>
@@ -24,8 +24,8 @@ import urllib.parse
 
 def main(user, password, database, host='localhost'):
     """
-     Creates the State “California” with the
-     City “San Francisco” from the database hbtn_0e_100_usa:
+    Lists all State objects, and corresponding City objects,
+    contained in the database hbtn_0e_101_usa
 
     Args:
         user: username to connect to the database.
@@ -43,10 +43,16 @@ def main(user, password, database, host='localhost'):
     Session = sessionmaker(bind=engine)
     Session.configure(bind=engine)
     session = Session()
-    state = State(name="California")
-    state.cities = [City(name="San Francisco")]
-    session.add(state)
-    session.commit()
+    results = session.query(State).order_by(State.id).all()
+    for result in results:
+        print(f"{result.id}: {result.name}")
+        for city in get_cities(session, result.id):
+            print(f"\t{city.id}: {city.name}")
+
+
+def get_cities(session, state_id):
+    return session.query(City).filter_by(state_id=state_id
+                                         ).order_by(City.id).all()
 
 
 if __name__ == '__main__':
