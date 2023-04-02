@@ -1,7 +1,3 @@
 #!/bin/bash
-# Send request and get the size of the response body
-response=$(curl -sI "$1")
-size=$(echo "$response" | awk '/Content-Length/ {print $2}')
-
-# Display the size of the response body in bytes
-echo "${size}"
+#size of the response body and display it in bytes
+curl -sI "$1" | awk '/Content-Length/ {print $2}'
